@@ -1,6 +1,6 @@
 <?php
 
-namespace steem;
+namespace SteemPHP;
 
 use JsonRPC\Client;
 use JsonRPC\HttpClient;

@@ -1,11 +1,13 @@
 {
     "name": "davidkevork/steemphp",
     "description": "steem php client api",
+    "homepage": "https://github.com/davidkevork/steemphp",
     "license": "MIT",
     "authors": [
         {
             "name": "David Kevork",
-            "email": "david@davidkevork.me"
+            "email": "david@davidkevork.me",
+            "website": "https://www.davidkevork.me",
         }
     ],
     "require": {
@@ -19,8 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "SteemPHP\\": "steem/"
+            "SteemPHP": "steem/"
         }
     },
-    "minimum-stability": "dev"
 }
