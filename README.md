@@ -7,11 +7,38 @@
 
 > This Project is Steem Client Api in PHP based on the official steemit steem.js https://github.com/steemit/steem-js/
 
+## Install in your project
+
+Run the command in your project folder:
+
+```
+composer require davidkevork/steemphp
+```
+
+Or modify your 'composer.json' to include:
+
+```
+{
+  "name": "yourname/projectname",
+  "require": {
+    "davidkevork/steemphp": "master"
+  }
+}
+```
+
 ## Development
 
-> This Project includes the dependencies along with this project code in one folder /vendor
+```
+git clone https://github.com/davidkevork/steemphp.git
+cd steemphp
+composer install
+```
 
-> All test files are included in /test folder
+`phpunit` within the folder should execute all unit tests for this project. If you're on OSX using entr (`brew install entr`), you can run the following command for live testing as you develop:
+
+```
+find src/ tests/ | entr -c phpunit
+```
 
 ## License
 
