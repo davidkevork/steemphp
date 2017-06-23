@@ -4,10 +4,10 @@ php:
   - 5.6
   - 7.0
   - 7.1
-
 before_script:
     - travis_retry composer self-update
-    - travis_retry composer install --no-interaction --prefer-source --dev
+    - travis_retry composer install --no-interaction --prefer-source
+    - composer require satooshi/php-coveralls:dev-master
 script: phpunit
 after_script:
   - php vendor/bin/coveralls -v
