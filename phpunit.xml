@@ -11,12 +11,12 @@
          stopOnFailure="false">
     <testsuites>
         <testsuite name="SteemPHP">
-            <directory suffix=".php">./test/</directory>
+            <directory suffix=".php">./tests/</directory>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist>
-            <directory suffix=".php">./vendor/steem</directory>
+            <directory suffix=".php">./src/SteemPHP/</directory>
         </whitelist>
     </filter>
     <logging>
