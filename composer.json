@@ -7,7 +7,7 @@
         {
             "name": "David Kevork",
             "email": "david@davidkevork.me",
-            "website": "https://www.davidkevork.me",
+            "website": "https://www.davidkevork.me"
         }
     ],
     "require": {
@@ -23,5 +23,5 @@
         "psr-4": {
             "SteemPHP": "steem/"
         }
-    },
+    }
 }
