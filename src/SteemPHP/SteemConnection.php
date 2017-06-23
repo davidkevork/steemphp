@@ -4,6 +4,7 @@ namespace SteemPHP;
 
 use JsonRPC\Client;
 use JsonRPC\HttpClient;
+use SteemPHP\SteemHelper;
 
 /**
 * SteemConnection
@@ -29,9 +30,11 @@ class SteemConnection
 
 	/**
 	 * Initialize the connection to the host
-	 * @param String $host 
+	 * @param String $host
+	 * 
+	 * $host = ['https://node.steem.ws', 'https://steemd.steemit.com']
 	 */
-	public function __construct($host)
+	public function __construct($host = 'https://steemd.steemit.com')
 	{
 		$this->host = trim($host);
 		$this->httpClient = new HttpClient($this->host);
@@ -41,6 +44,7 @@ class SteemConnection
 
 	/**
 	 * __toString() will return JsonRPC data
+	 * TODO: remove when is no more needed
 	 * @return $this
 	 */
 	public function __toString()
@@ -48,6 +52,21 @@ class SteemConnection
 		echo '<pre>';
 		print_r($this);
 		echo '</pre>';
+	}
+
+	/**
+	 * Get Dynamic Global Properties
+	 * @return array
+	 */
+	public function getProps()
+	{
+		try {
+			$return = $this->client->call(0, 'get_dynamic_global_properties', []);
+			$return['steem_per_mvests'] = floor(SteemHelper::toInt($return['total_vesting_fund_steem']) / SteemHelper::toInt($return['total_vesting_shares']) * 1000000 * 1000) / 1000;
+			return $return;
+		} catch (Exception $e) {
+			return  $e->getMessage();
+		}
 	}
 
 	/**
@@ -68,7 +87,7 @@ class SteemConnection
 	{
 		$this->username = trim($username);
 		$this->limit = filter_var($limit, FILTER_VALIDATE_INT);
-		$this->skip = filter_var($skip, FILTER_VALIDATE_INT);
+		$this->skip = $skip;
 		try {
 			return $this->client->call(0, 'get_account_history', [$this->username, $this->skip, $this->limit]);
 		} catch (Exception $e) {
@@ -93,6 +112,39 @@ class SteemConnection
 				return $this->return;
 			}
 			return $this->return;
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
+	/**
+	 * Get Reputation of $account
+	 * @param String $account 
+	 * @return array
+	 */
+	public function getReputation($account)
+	{
+		$this->account = trim($account);
+		try {
+			$this->accountDetails = $this->getAccount($this->account);
+			return SteemHelper::reputation($this->accountDetails[0]['reputation']);
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
+	/**
+	 * Get the amount of steem $account's vest is worth
+	 * @param String $account 
+	 * @return array
+	 */
+	public function vestToSteemByAccount($account)
+	{
+		$this->account = trim($account);
+		try {
+			$this->accountDetails = $this->getAccount($this->account);
+			$this->Props = $this->getProps();
+			return SteemHelper::vestToSteem($this->accountDetails[0]['vesting_shares'], $this->getProps['total_vesting_shares'], $this->Props['total_vesting_fund_steem']);
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}
@@ -159,6 +211,95 @@ class SteemConnection
 		try {
 			$this->api = $this->getApi('follow_api');
 			return $this->client->call($this->api, 'get_follow_count', [$this->account]);
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
+	/**
+	 * Get the list of trending tags after $afteTag
+	 * @param String $afterTag 
+	 * @param int $limit 
+	 * @return array
+	 */
+	public function getTrendingTags($afterTag, $limit = 100)
+	{
+		$this->afterTag = trim($afterTag);
+		$this->limit = filter_var($limit, FILTER_VALIDATE_INT);
+		try {
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'get_trending_tags', [$this->afterTag, $this->limit]);
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
+	/**
+	 * Get Content of an article
+	 * @param String $author 
+	 * @param String $permlink 
+	 * @return array
+	 */
+	public function getContent($author, $permlink)
+	{
+		$this->author = trim($author);
+		$this->permlink = trim($permlink);
+		try {
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'get_content', [$this->author, $this->permlink]);
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
+	/**
+	 * Get Replies on an article
+	 * @param String $author 
+	 * @param String $permlink 
+	 * @return array
+	 */
+	public function getContentReplies($author, $permlink)
+	{
+		$this->author = trim($author);
+		$this->permlink = trim($permlink);
+		try {
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'get_content_replies', [$this->author, $this->permlink]);
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
+	/**
+	 * Get Discussions by trend
+	 * @param String $tag 
+	 * @param int $limit 
+	 * @return array
+	 */
+	public function getDiscussionsByTrend($tag, $limit = 100)
+	{
+		$this->tag = trim($tag);
+		$this->limit = filter_var($limit, FILTER_VALIDATE_INT);
+		try {
+			$this->query = json_encode(array("tag"=>"steem", "limit"=> "10"));
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'get_discussions_by_trending', [$this->query]);
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
+	/**
+	 * Get List of Tags Used by the author
+	 * @param String $account 
+	 * @return array
+	 */
+	public function getTagsUsedByAuthor($account)
+	{
+		$this->account = trim($account);
+		try {
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'get_tags_used_by_author', [$this->account]);
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}
