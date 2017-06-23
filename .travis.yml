@@ -6,7 +6,7 @@ php:
   - 7.1
 before_script:
     - composer require satooshi/php-coveralls:dev-master
-    - composer require davidkevork/steemphp
+    - composer require "davidkevork/steemphp": "*"
     - composer install
 script: phpunit
 after_script:
