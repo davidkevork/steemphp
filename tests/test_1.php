@@ -1,12 +1,14 @@
 <?php
 
-include './../vendor/autoload.php';
+include (__DIR__).'/../vendor/autoload.php';
 
 use SteemPHP\SteemConnection;
 
 $SteemConnection = new SteemConnection('https://steemd.steemit.com');
 
-echo '<pre>';
+/* If viewing from web browser uncomment the line below */
+
+/* echo '<pre>'; */
 
 /* getting account `davidk` details */
 print_r($SteemConnection->getAccount('davidk'));
