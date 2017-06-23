@@ -6,22 +6,22 @@
     "authors": [
         {
             "name": "David Kevork",
-            "email": "david@davidkevork.me",
-            "website": "https://www.davidkevork.me"
+            "email": "david@davidkevork.me"
         }
     ],
     "require": {
         "php": ">=5.5.9",
         "fguillot/json-rpc": "^1.2",
         "michelf/php-markdown": "~1.6.0",
-        "ezyang/htmlpurifier": "~4.8.0"
+        "ezyang/htmlpurifier": "~4.8.0",
+        "davidkevork/steemphp": ""
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*"
     },
     "autoload": {
         "psr-4": {
-            "SteemPHP": "steem/"
+            "SteemPHP\\": "src/SteemPHP/"
         }
     }
 }
