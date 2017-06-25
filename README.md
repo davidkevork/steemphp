@@ -12,7 +12,7 @@
 Run the command in your project folder:
 
 ```
-composer require davidkevork/steemphp
+composer require davidkevork/steemphp:dev-master
 ```
 
 Or modify your 'composer.json' to include:
@@ -21,7 +21,7 @@ Or modify your 'composer.json' to include:
 {
   "name": "yourname/projectname",
   "require": {
-    "davidkevork/steemphp": "dev-master"
+    "davidkevork/steemphp": "master"
   }
 }
 ```

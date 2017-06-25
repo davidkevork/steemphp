@@ -34,7 +34,7 @@ class SteemConnection
 	 * 
 	 * $host = ['https://node.steem.ws', 'https://steemd.steemit.com']
 	 */
-	public function __construct($host = 'https://steemd.steemit.com')
+	public function __construct($host = 'https://node.steem.ws')
 	{
 		$this->host = trim($host);
 		$this->httpClient = new HttpClient($this->host);
@@ -43,15 +43,13 @@ class SteemConnection
 	}
 
 	/**
-	 * __toString() will return JsonRPC data
-	 * TODO: remove when is no more needed
-	 * @return $this
+	 * Get Api number
+	 * @param String $name 
+	 * @return int
 	 */
-	public function __toString()
+	public function getApi($name)
 	{
-		echo '<pre>';
-		print_r($this);
-		echo '</pre>';
+		return $this->client->call(1, 'get_api_by_name', [$name]);
 	}
 
 	/**
@@ -148,16 +146,6 @@ class SteemConnection
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}
-	}
-
-	/**
-	 * Get Api number
-	 * @param String $name 
-	 * @return int
-	 */
-	public function getApi($name)
-	{
-		return $this->client->call(1, 'get_api_by_name', [$name]);
 	}
 
 	/**
@@ -265,41 +253,6 @@ class SteemConnection
 		try {
 			$this->api = $this->getApi('database_api');
 			return $this->client->call($this->api, 'get_content_replies', [$this->author, $this->permlink]);
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
-	}
-
-	/**
-	 * Get Discussions by trend
-	 * @param String $tag 
-	 * @param int $limit 
-	 * @return array
-	 */
-	public function getDiscussionsByTrend($tag, $limit = 100)
-	{
-		$this->tag = trim($tag);
-		$this->limit = filter_var($limit, FILTER_VALIDATE_INT);
-		try {
-			$this->query = json_encode(array("tag"=>"steem", "limit"=> "10"));
-			$this->api = $this->getApi('database_api');
-			return $this->client->call($this->api, 'get_discussions_by_trending', [$this->query]);
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
-	}
-
-	/**
-	 * Get List of Tags Used by the author
-	 * @param String $account 
-	 * @return array
-	 */
-	public function getTagsUsedByAuthor($account)
-	{
-		$this->account = trim($account);
-		try {
-			$this->api = $this->getApi('database_api');
-			return $this->client->call($this->api, 'get_tags_used_by_author', [$this->account]);
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}
