@@ -21,7 +21,7 @@ Or modify your 'composer.json' to include:
 {
   "name": "yourname/projectname",
   "require": {
-    "davidkevork/steemphp": "master"
+    "davidkevork/steemphp": "dev-master"
   }
 }
 ```
