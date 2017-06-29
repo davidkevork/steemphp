@@ -203,61 +203,7 @@ class SteemConnection
 			return $e->getMessage();
 		}
 	}
-
-	/**
-	 * Get the list of trending tags after $afteTag
-	 * @param String $afterTag 
-	 * @param int $limit 
-	 * @return array
-	 */
-	public function getTrendingTags($afterTag, $limit = 100)
-	{
-		$this->afterTag = trim($afterTag);
-		$this->limit = filter_var($limit, FILTER_VALIDATE_INT);
-		try {
-			$this->api = $this->getApi('database_api');
-			return $this->client->call($this->api, 'get_trending_tags', [$this->afterTag, $this->limit]);
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
-	}
-
-	/**
-	 * Get Content of an article
-	 * @param String $author 
-	 * @param String $permlink 
-	 * @return array
-	 */
-	public function getContent($author, $permlink)
-	{
-		$this->author = trim($author);
-		$this->permlink = trim($permlink);
-		try {
-			$this->api = $this->getApi('database_api');
-			return $this->client->call($this->api, 'get_content', [$this->author, $this->permlink]);
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
-	}
-
-	/**
-	 * Get Replies on an article
-	 * @param String $author 
-	 * @param String $permlink 
-	 * @return array
-	 */
-	public function getContentReplies($author, $permlink)
-	{
-		$this->author = trim($author);
-		$this->permlink = trim($permlink);
-		try {
-			$this->api = $this->getApi('database_api');
-			return $this->client->call($this->api, 'get_content_replies', [$this->author, $this->permlink]);
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
-	}
-
+	
 }
 
 ?>
