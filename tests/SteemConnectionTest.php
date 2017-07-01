@@ -6,7 +6,7 @@ class SteemConnectionTest extends PHPUnit_Framework_TestCase
 {
 	protected function setUp()
 	{
-		$this->SteemConnection = new \SteemPHP\SteemConnection('https://node.steem.ws');
+		$this->SteemConnection = new \SteemPHP\SteemConnection('https://steemd.steemit.com');
 	}
 
 	public function testGetApi()
@@ -52,21 +52,6 @@ class SteemConnectionTest extends PHPUnit_Framework_TestCase
 	public function testCountFollows()
 	{
 		$this->assertArrayHasKey('account', $this->SteemConnection->countFollows('davidk'));
-	}
-
-	public function testGetTrendingTags()
-	{
-		$this->assertArrayHasKey('0', $this->SteemConnection->getTrendingTags('steemit'));
-	}
-
-	public function testGetContent()
-	{
-		$this->assertArrayHasKey('id', $this->SteemConnection->getContent('davidk', 'steemphp-new-functions-added-part-1'));
-	}
-
-	public function testGetContentReplies()
-	{
-		$this->assertArrayHasKey('0', $this->SteemConnection->getContentReplies('davidk', 'steemphp-new-functions-added-part-1'));
 	}
 
 }
