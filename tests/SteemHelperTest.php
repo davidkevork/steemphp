@@ -14,7 +14,7 @@ class SteemHelperTest extends PHPUnit_Framework_TestCase
 
 	public function test_filter_int()
 	{
-		$this->assertInternalType('int', SteemHelper::filter_int(500));
+		$this->assertInternalType('int', SteemHelper::filterInt(500));
 	}
 
 	public function testReputation()
