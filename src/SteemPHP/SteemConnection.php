@@ -228,7 +228,11 @@ class SteemConnection
 			return $e->getMessage();
 		}
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 5fbef39e5cb59eed2faf21c810740c62268a2530
 }
 
 ?>
