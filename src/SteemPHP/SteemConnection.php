@@ -131,26 +131,17 @@ class SteemConnection
 		}
 	}
 
-
-	public function GET_ACCOUNT_REPUTATIONS($account)
+	/**
+	 * Get list of accounts that are similar to $account name and their reputations
+	 * @param String $account 
+	 * @param int $limit 
+	 * @return array
+	 */
+	public function getAccountReputations($account, $limit = 100)
 	{
 		try {
 			$this->api = $this->getApi('follow_api');
-			$this->return = $this->client->call($this->api, 'get_account_reputations', [$account, 50]);
-			foreach ($this->return as $key => $value) {
-				echo $value['account'].':'.SteemHelper::reputation($value['reputation']).'<br>';
-			}
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
-	}
-
-	public function login($username, $password)
-	{
-		try {
-			$this->api = $this->getApi('login_api');
-			$this->return = $this->client->call($this->api, 'login', [$username, $password]);
-			return $this->return;
+			$this->return = $this->client->call($this->api, 'get_account_reputations', [$account, $limit]);
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}
@@ -228,11 +219,7 @@ class SteemConnection
 			return $e->getMessage();
 		}
 	}
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> 5fbef39e5cb59eed2faf21c810740c62268a2530
 }
 
 ?>
