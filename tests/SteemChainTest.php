@@ -6,7 +6,7 @@ class SteemChainTest extends PHPUnit_Framework_TestCase
 {
 	protected function setUp()
 	{
-		$this->SteemChain = new \SteemPHP\SteemChain('https://node.steem.ws');
+		$this->SteemChain = new \SteemPHP\SteemChain('https://steemd.steemit.com');
 	}
 
 	public function testGetApi()
