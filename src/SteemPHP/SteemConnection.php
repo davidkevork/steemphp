@@ -84,8 +84,8 @@ class SteemConnection
 	public function getAccountHistory($username, $limit = 100, $skip = -1)
 	{
 		$this->username = trim($username);
-		$this->limit = filter_var($limit, FILTER_VALIDATE_INT);
-		$this->skip = $skip;
+		$this->limit = SteemHelper::filterInt($limit);
+		$this->skip = SteemHelper::filterInt($skip);
 		try {
 			return $this->client->call(0, 'get_account_history', [$this->username, $this->skip, $this->limit]);
 		} catch (Exception $e) {
@@ -126,6 +126,31 @@ class SteemConnection
 		try {
 			$this->accountDetails = $this->getAccount($this->account);
 			return SteemHelper::reputation($this->accountDetails[0]['reputation']);
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
+
+	public function GET_ACCOUNT_REPUTATIONS($account)
+	{
+		try {
+			$this->api = $this->getApi('follow_api');
+			$this->return = $this->client->call($this->api, 'get_account_reputations', [$account, 50]);
+			foreach ($this->return as $key => $value) {
+				echo $value['account'].':'.SteemHelper::reputation($value['reputation']).'<br>';
+			}
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
+	public function login($username, $password)
+	{
+		try {
+			$this->api = $this->getApi('login_api');
+			$this->return = $this->client->call($this->api, 'login', [$username, $password]);
+			return $this->return;
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}
@@ -199,60 +224,6 @@ class SteemConnection
 		try {
 			$this->api = $this->getApi('follow_api');
 			return $this->client->call($this->api, 'get_follow_count', [$this->account]);
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
-	}
-
-	/**
-	 * Get the list of trending tags after $afteTag
-	 * @param String $afterTag 
-	 * @param int $limit 
-	 * @return array
-	 */
-	public function getTrendingTags($afterTag, $limit = 100)
-	{
-		$this->afterTag = trim($afterTag);
-		$this->limit = filter_var($limit, FILTER_VALIDATE_INT);
-		try {
-			$this->api = $this->getApi('database_api');
-			return $this->client->call($this->api, 'get_trending_tags', [$this->afterTag, $this->limit]);
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
-	}
-
-	/**
-	 * Get Content of an article
-	 * @param String $author 
-	 * @param String $permlink 
-	 * @return array
-	 */
-	public function getContent($author, $permlink)
-	{
-		$this->author = trim($author);
-		$this->permlink = trim($permlink);
-		try {
-			$this->api = $this->getApi('database_api');
-			return $this->client->call($this->api, 'get_content', [$this->author, $this->permlink]);
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
-	}
-
-	/**
-	 * Get Replies on an article
-	 * @param String $author 
-	 * @param String $permlink 
-	 * @return array
-	 */
-	public function getContentReplies($author, $permlink)
-	{
-		$this->author = trim($author);
-		$this->permlink = trim($permlink);
-		try {
-			$this->api = $this->getApi('database_api');
-			return $this->client->call($this->api, 'get_content_replies', [$this->author, $this->permlink]);
 		} catch (Exception $e) {
 			return $e->getMessage();
 		}
