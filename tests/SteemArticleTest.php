@@ -93,7 +93,7 @@ class SteemArticleTest extends PHPUnit_Framework_TestCase
 	public function testGetDiscussionsByAuthorBeforeDate()
 	{
 		$this->assertArrayHasKey('author', $this->SteemArticle->getDiscussionsByAuthorBeforeDate('davidk', '', time(), 2)[0]);
-		$this->assertArrayHasKey('author', $SteemArticle->getDiscussionsByAuthorBeforeDate('davidk', '', '2017-06-29', 2)[0]);
+		$this->assertArrayHasKey('author', $this->SteemArticle->getDiscussionsByAuthorBeforeDate('davidk', '', '2017-06-29', 2)[0]);
 	}
 
 	public function testGetRepliesByLastUpvote()

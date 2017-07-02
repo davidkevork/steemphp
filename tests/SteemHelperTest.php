@@ -34,7 +34,7 @@ class SteemHelperTest extends PHPUnit_Framework_TestCase
 
 	public function testContains()
 	{
-		$this->assertEquals('1', SteemHelper::contains('david', 'davidk'));
+		$this->assertEquals('1', SteemHelper::contains('davidk', 'd'));
 	}
 
 	public function testCharAt()
