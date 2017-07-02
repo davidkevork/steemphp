@@ -57,12 +57,8 @@ class SteemChain
 	 */
 	public function getVersion()
 	{
-		try {
-			$this->api = $this->getApi('login_api');
-			return $this->client->call($this->api, 'get_version', []);
-		} catch (Exception $e) {
-			return  $e->getMessage();
-		}
+		$this->api = $this->getApi('login_api');
+		return $this->client->call($this->api, 'get_version', []);
 	}
 
 	/**
@@ -71,12 +67,8 @@ class SteemChain
 	 */
 	public function getAccountCount()
 	{
-		try {
-			$this->api = $this->getApi('database_api');
-			return $this->client->call($this->api, 'get_account_count', []);
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
+		$this->api = $this->getApi('database_api');
+		return $this->client->call($this->api, 'get_account_count', []);
 	}
 
 	/**
@@ -85,12 +77,8 @@ class SteemChain
 	 */
 	public function getChainProperties()
 	{
-		try {
-			$this->api = $this->getApi('database_api');
-			return $this->client->call($this->api, 'get_chain_properties', []);
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
+		$this->api = $this->getApi('database_api');
+		return $this->client->call($this->api, 'get_chain_properties', []);
 	}
 
 	/**
@@ -99,12 +87,8 @@ class SteemChain
 	 */
 	public function getConfig()
 	{
-		try {
-			$this->api = $this->getApi('database_api');
-			return $this->client->call($this->api, 'get_config', []);
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
+		$this->api = $this->getApi('database_api');
+		return $this->client->call($this->api, 'get_config', []);
 	}
 
 	/**
@@ -113,12 +97,8 @@ class SteemChain
 	 */
 	public function getDynamicGlobalProperties()
 	{
-		try {
-			$this->api = $this->getApi('database_api');
-			return $this->client->call($this->api, 'get_dynamic_global_properties', []);
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
+		$this->api = $this->getApi('database_api');
+		return $this->client->call($this->api, 'get_dynamic_global_properties', []);
 	}
 
 	/**
@@ -127,12 +107,8 @@ class SteemChain
 	 */
 	public function getFeedHistory()
 	{
-		try {
-			$this->api = $this->getApi('database_api');
-			return $this->client->call($this->api, 'get_feed_history', []);
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
+		$this->api = $this->getApi('database_api');
+		return $this->client->call($this->api, 'get_feed_history', []);
 	}
 
 	/**
@@ -141,12 +117,8 @@ class SteemChain
 	 */
 	public function getCurrentMeidanHistoryPrice()
 	{
-		try {
-			$this->api = $this->getApi('database_api');
-			return $this->client->call($this->api, 'get_current_median_history_price', []);
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
+		$this->api = $this->getApi('database_api');
+		return $this->client->call($this->api, 'get_current_median_history_price', []);
 	}
 
 	/**
@@ -155,12 +127,8 @@ class SteemChain
 	 */
 	public function getHardforkVersion()
 	{
-		try {
-			$this->api = $this->getApi('database_api');
-			return $this->client->call($this->api, 'get_hardfork_version', []);
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
+		$this->api = $this->getApi('database_api');
+		return $this->client->call($this->api, 'get_hardfork_version', []);
 	}
 
 	/**
@@ -169,12 +137,8 @@ class SteemChain
 	 */
 	public function getNextScheduledHardfork()
 	{
-		try {
-			$this->api = $this->getApi('database_api');
-			return $this->client->call($this->api, 'get_next_scheduled_hardfork', []);
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
+		$this->api = $this->getApi('database_api');
+		return $this->client->call($this->api, 'get_next_scheduled_hardfork', []);
 	}
 
 }

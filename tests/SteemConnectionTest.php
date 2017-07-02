@@ -21,12 +21,12 @@ class SteemConnectionTest extends PHPUnit_Framework_TestCase
 
 	public function testGetAccountHistory()
 	{
-		$this->assertArrayHasKey('0', $this->SteemConnection->getAccountHistory('davidk'));
+		$this->assertArrayHasKey('trx_id', $this->SteemConnection->getAccountHistory('davidk', 2)[0][1]);
 	}
 
 	public function testGetAccount()
 	{
-		$this->assertArrayHasKey('0', $this->SteemConnection->getAccount('davidk'));
+		$this->assertArrayHasKey('name', $this->SteemConnection->getAccount('davidk')[0]);
 	}
 
 	public function testGetReputation()
@@ -41,17 +41,22 @@ class SteemConnectionTest extends PHPUnit_Framework_TestCase
 
 	public function testGetFollowing()
 	{
-		$this->assertArrayHasKey('0', $this->SteemConnection->getFollowing('davidk'));
+		$this->assertArrayHasKey('follower', $this->SteemConnection->getFollowing('davidk')[0]);
 	}
 
 	public function testGetFollowers()
 	{
-		$this->assertArrayHasKey('0', $this->SteemConnection->getFollowers('davidk'));
+		$this->assertArrayHasKey('follower', $this->SteemConnection->getFollowers('davidk')[0]);
 	}
 
 	public function testCountFollows()
 	{
 		$this->assertArrayHasKey('account', $this->SteemConnection->countFollows('davidk'));
+	}
+
+	public function testGetAccountReputations()
+	{
+		$this->assertArrayHasKey('account', $this->SteemConnection->getAccountReputations('davidk', 2)[0]);
 	}
 
 }
