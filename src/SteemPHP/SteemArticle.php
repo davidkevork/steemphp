@@ -59,7 +59,7 @@ class SteemArticle
 	 * @return array
 	 */
 	public function getTrendingTags($afterTag, $limit = 100)
-	{;
+	{
 		$this->api = $this->getApi('database_api');
 		return $this->client->call($this->api, 'get_trending_tags', [$afterTag, SteemHelper::filterInt($limit)]);
 	}
