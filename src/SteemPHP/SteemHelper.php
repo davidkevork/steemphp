@@ -170,7 +170,7 @@ trait SteemHelper
 	 */
 	public static function vestToSteem($vestingShares, $totalVestingFundSteem, $totalVestingShares)
 	{
-		return floatval($totalVestingFundSteem) * floatval($vestingShares) / floatval($e);
+		return floatval($totalVestingFundSteem) * floatval($vestingShares) / floatval($totalVestingShares);
 	}
 
 	/**
