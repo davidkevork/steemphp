@@ -9,7 +9,7 @@ use SteemPHP\SteemHelper;
 /**
 * SteemConnection
 * 
-* All the Calls will be called from this class as it will have most of the functions
+* This Class contains functions for fetching articles from steeemit blockchain
 */
 class SteemArticle
 {
@@ -296,6 +296,17 @@ class SteemArticle
 	{
 		$this->api = $this->getApi('database_api');
 		return $this->client->call($this->api, 'get_state', [$path]);
+	}
+
+	public function gerOpenOrders($account)
+	{
+		$this->api = $this->getApi('database_api');
+		return $this->client->call($this->api, 'get_open_orders', [$account]);
+	}
+
+	public function estimateAccountValue($account)
+	{
+		return SteemHelper::estimateAccountValue($this->getState('/@'.$account.'/transfers'), $this->gerOpenOrders($account), $account);
 	}
 
 }

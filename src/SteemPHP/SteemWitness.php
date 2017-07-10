@@ -7,9 +7,9 @@ use JsonRPC\HttpClient;
 use SteemPHP\SteemHelper;
 
 /**
-* SteemConnection
+* SteemWitness
 * 
-* All the Calls will be called from this class as it will have most of the functions
+* SteemWitness contains witness functions
 */
 class SteemWitness
 {

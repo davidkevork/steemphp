@@ -52,7 +52,7 @@ trait SteemHelper
 			return 0;
 		} else {
 			$e = $rep;
-			$r =  (self::charAt($e, 0) === "-");
+			$r =  $e < 0 ? true : false;
 			$e = $r ? substr($e, 1) : $e;
 			$a = log10($e);
 			$a = max($a - 9, 0);

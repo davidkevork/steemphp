@@ -8,7 +8,7 @@ use JsonRPC\HttpClient;
 /**
 * SteemChain
 * 
-* This Class is contains only Chain Methods
+* This Class is contains only Steemit BlockChain Methods
 */
 class SteemChain
 {
