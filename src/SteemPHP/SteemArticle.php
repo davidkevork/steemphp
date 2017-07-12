@@ -14,7 +14,7 @@ use SteemPHP\SteemHelper;
 class SteemArticle
 {
 
-/**
+	/**
 	 * @var $host
 	 * 
 	 * $host will be where our script will connect to fetch the data
@@ -49,7 +49,11 @@ class SteemArticle
 	 */
 	public function getApi($name)
 	{
-		return $this->client->call(1, 'get_api_by_name', [$name]);
+		try{
+			return $this->client->call(1, 'get_api_by_name', [$name]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -60,8 +64,12 @@ class SteemArticle
 	 */
 	public function getTrendingTags($afterTag, $limit = 100)
 	{
-		$this->api = $this->getApi('database_api');
-		return $this->client->call($this->api, 'get_trending_tags', [$afterTag, SteemHelper::filterInt($limit)]);
+		try {
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'get_trending_tags', [$afterTag, SteemHelper::filterInt($limit)]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -72,8 +80,12 @@ class SteemArticle
 	 */
 	public function getContent($author, $permlink)
 	{
-		$this->api = $this->getApi('database_api');
-		return $this->client->call($this->api, 'get_content', [$author, $permlink]);
+		try {
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'get_content', [$author, $permlink]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -84,8 +96,12 @@ class SteemArticle
 	 */
 	public function getContentReplies($author, $permlink)
 	{
-		$this->api = $this->getApi('database_api');
-		return $this->client->call($this->api, 'get_content_replies', [$author, $permlink]);
+		try {
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'get_content_replies', [$author, $permlink]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -96,9 +112,13 @@ class SteemArticle
 	 */
 	public function getDiscussionsByTrending($tag, $limit = 100)
 	{
-		$this->api = $this->getApi('database_api');
-		$query = ['tag' => $tag, 'limit' => SteemHelper::filterInt($limit)];
-		return $this->client->call($this->api, 'get_discussions_by_trending', [$query]);
+		try {
+			$this->api = $this->getApi('database_api');
+			$query = ['tag' => $tag, 'limit' => SteemHelper::filterInt($limit)];
+			return $this->client->call($this->api, 'get_discussions_by_trending', [$query]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -109,9 +129,13 @@ class SteemArticle
 	 */
 	public function getDiscussionsByCreated($tag, $limit = 100)
 	{
-		$this->api = $this->getApi('database_api');
-		$query = ['tag' => $tag, 'limit' => SteemHelper::filterInt($limit)];
-		return $this->client->call($this->api, 'get_discussions_by_created', [$query]);
+		try {
+			$this->api = $this->getApi('database_api');
+			$query = ['tag' => $tag, 'limit' => SteemHelper::filterInt($limit)];
+			return $this->client->call($this->api, 'get_discussions_by_created', [$query]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 
@@ -124,9 +148,13 @@ class SteemArticle
 	 */
 	public function getDiscussionsByActive($tag, $limit = 100)
 	{
-		$this->api = $this->getApi('database_api');
-		$query = ['tag' => $tag, 'limit' => SteemHelper::filterInt($limit)];
-		return $this->client->call($this->api, 'get_discussions_by_active', [$query]);
+		try {
+			$this->api = $this->getApi('database_api');
+			$query = ['tag' => $tag, 'limit' => SteemHelper::filterInt($limit)];
+			return $this->client->call($this->api, 'get_discussions_by_active', [$query]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -137,9 +165,13 @@ class SteemArticle
 	 */
 	public function getDiscussionsByPromoted($tag, $limit = 100)
 	{
-		$this->api = $this->getApi('database_api');
-		$query = ['tag' => $tag, 'limit' => SteemHelper::filterInt($limit)];
-		return $this->client->call($this->api, 'get_discussions_by_promoted', [$query]);	
+		try {
+			$this->api = $this->getApi('database_api');
+			$query = ['tag' => $tag, 'limit' => SteemHelper::filterInt($limit)];
+			return $this->client->call($this->api, 'get_discussions_by_promoted', [$query]);	
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -150,9 +182,13 @@ class SteemArticle
 	 */
 	public function getDiscussionsByCashout($tag, $limit = 100)
 	{
-		$this->api = $this->getApi('database_api');
-		$query = ['tag' => $tag, 'limit' => SteemHelper::filterInt($limit)];
-		return $this->client->call($this->api, 'get_discussions_by_cashout', [$query]);	
+		try {
+			$this->api = $this->getApi('database_api');
+			$query = ['tag' => $tag, 'limit' => SteemHelper::filterInt($limit)];
+			return $this->client->call($this->api, 'get_discussions_by_cashout', [$query]);	
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -163,9 +199,13 @@ class SteemArticle
 	 */
 	public function getDiscussionsByPayout($tag, $limit = 100)
 	{
-		$this->api = $this->getApi('database_api');
-		$query = ['tag' => $tag, 'limit' => SteemHelper::filterInt($limit)];
-		return $this->client->call($this->api, 'get_discussions_by_payout', [$query]);
+		try {
+			$this->api = $this->getApi('database_api');
+			$query = ['tag' => $tag, 'limit' => SteemHelper::filterInt($limit)];
+			return $this->client->call($this->api, 'get_discussions_by_payout', [$query]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -176,9 +216,13 @@ class SteemArticle
 	 */
 	public function getDiscussionsByVotes($tag, $limit = 100)
 	{
-		$this->api = $this->getApi('database_api');
-		$query = ['tag' => $tag, 'limit' => SteemHelper::filterInt($limit)];
-		return $this->client->call($this->api, 'get_discussions_by_votes', [$query]);
+		try {
+			$this->api = $this->getApi('database_api');
+			$query = ['tag' => $tag, 'limit' => SteemHelper::filterInt($limit)];
+			return $this->client->call($this->api, 'get_discussions_by_votes', [$query]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -189,9 +233,13 @@ class SteemArticle
 	 */
 	public function getDiscussionsByChildren($tag, $limit = 100)
 	{
-		$this->api = $this->getApi('database_api');
-		$query = ['tag' => $tag, 'limit' => SteemHelper::filterInt($limit)];
-		return $this->client->call($this->api, 'get_discussions_by_children', [$query]);
+		try {
+			$this->api = $this->getApi('database_api');
+			$query = ['tag' => $tag, 'limit' => SteemHelper::filterInt($limit)];
+			return $this->client->call($this->api, 'get_discussions_by_children', [$query]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -202,9 +250,13 @@ class SteemArticle
 	 */
 	public function getDiscussionsByHot($tag, $limit = 100)
 	{
-		$this->api = $this->getApi('database_api');
-		$query = ['tag' => $tag, 'limit' => SteemHelper::filterInt($limit)];
-		return $this->client->call($this->api, 'get_discussions_by_hot', [$query]);
+		try {
+			$this->api = $this->getApi('database_api');
+			$query = ['tag' => $tag, 'limit' => SteemHelper::filterInt($limit)];
+			return $this->client->call($this->api, 'get_discussions_by_hot', [$query]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -215,9 +267,13 @@ class SteemArticle
 	 */
 	public function getDiscussionsByFeed($author, $limit = 100)
 	{
-		$this->api = $this->getApi('database_api');
-		$query = ['tag' => $author, 'limit' => SteemHelper::filterInt($limit)];
-		return $this->client->call($this->api, 'get_discussions_by_feed', [$query]);
+		try {
+			$this->api = $this->getApi('database_api');
+			$query = ['tag' => $author, 'limit' => SteemHelper::filterInt($limit)];
+			return $this->client->call($this->api, 'get_discussions_by_feed', [$query]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -228,9 +284,13 @@ class SteemArticle
 	 */
 	public function getDiscussionsByBlog($author, $limit = 100)
 	{
-		$this->api = $this->getApi('database_api');
-		$query = ['tag' => $author, 'limit' => SteemHelper::filterInt($limit)];
-		return $this->client->call($this->api, 'get_discussions_by_blog', [$query]);
+		try {
+			$this->api = $this->getApi('database_api');
+			$query = ['tag' => $author, 'limit' => SteemHelper::filterInt($limit)];
+			return $this->client->call($this->api, 'get_discussions_by_blog', [$query]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -241,9 +301,13 @@ class SteemArticle
 	 */
 	public function getDiscussionsByComments($author, $permlink, $limit = 100)
 	{
-		$this->api = $this->getApi('database_api');
-		$query = ['start_author' => $author, 'start_permlink' => $permlink, 'limit' => SteemHelper::filterInt($limit)];
-		return $this->client->call($this->api, 'get_discussions_by_comments', [$query]);	
+		try {
+			$this->api = $this->getApi('database_api');
+			$query = ['start_author' => $author, 'start_permlink' => $permlink, 'limit' => SteemHelper::filterInt($limit)];
+			return $this->client->call($this->api, 'get_discussions_by_comments', [$query]);	
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -256,8 +320,12 @@ class SteemArticle
 	 */
 	public function getDiscussionsByAuthorBeforeDate($author, $startPermlink, $beforeDate, $limit = 100)
 	{
-		$this->api = $this->getApi('database_api');
-		return $this->client->call($this->api, 'get_discussions_by_author_before_date', [$author, $startPermlink, SteemHelper::filterDate($beforeDate), SteemHelper::filterInt($limit)]);	
+		try {
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'get_discussions_by_author_before_date', [$author, $startPermlink, SteemHelper::filterDate($beforeDate), SteemHelper::filterInt($limit)]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}	
 	}
 
 	/**
@@ -270,8 +338,12 @@ class SteemArticle
 	 */
 	public function getRepliesByLastUpvote($startAuthor, $startPermlink, $limit = 100)
 	{
-		$this->api = $this->getApi('database_api');
-		return $this->client->call($this->api, 'get_replies_by_last_update', [$startAuthor, $startPermlink, SteemHelper::filterInt($limit)]);	
+		try {
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'get_replies_by_last_update', [$startAuthor, $startPermlink, SteemHelper::filterInt($limit)]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -283,8 +355,12 @@ class SteemArticle
 	 */
 	public function getActiveVotes($startAuthor, $startPermlink)
 	{
-		$this->api = $this->getApi('database_api');
-		return $this->client->call($this->api, 'get_active_votes', [$startAuthor, $startPermlink]);
+		try {
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'get_active_votes', [$startAuthor, $startPermlink]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -294,19 +370,12 @@ class SteemArticle
 	 */
 	public function getState($path)
 	{
-		$this->api = $this->getApi('database_api');
-		return $this->client->call($this->api, 'get_state', [$path]);
-	}
-
-	public function gerOpenOrders($account)
-	{
-		$this->api = $this->getApi('database_api');
-		return $this->client->call($this->api, 'get_open_orders', [$account]);
-	}
-
-	public function estimateAccountValue($account)
-	{
-		return SteemHelper::estimateAccountValue($this->getState('/@'.$account.'/transfers'), $this->gerOpenOrders($account), $account);
+		try {
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'get_state', [$path]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 }

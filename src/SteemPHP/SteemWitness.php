@@ -14,7 +14,7 @@ use SteemPHP\SteemHelper;
 class SteemWitness
 {
 
-/**
+	/**
 	 * @var $host
 	 * 
 	 * $host will be where our script will connect to fetch the data
@@ -49,7 +49,11 @@ class SteemWitness
 	 */
 	public function getApi($name)
 	{
-		return $this->client->call(1, 'get_api_by_name', [$name]);
+		try {
+			return $this->client->call(1, 'get_api_by_name', [$name]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -58,8 +62,12 @@ class SteemWitness
 	 */
 	public function getWitnessCount()
 	{
-		$this->api = $this->getApi('database_api');
-		return $this->client->call($this->api, 'get_witness_count', []);
+		try {
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'get_witness_count', []);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -70,8 +78,12 @@ class SteemWitness
 	 */
 	public function lookupWitnessAccounts($lowerBoundName, $limit = 100)
 	{
-		$this->api = $this->getApi('database_api');
-		return $this->client->call($this->api, 'lookup_witness_accounts', [$lowerBoundName, SteemHelper::filterInt($limit)]);
+		try {
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'lookup_witness_accounts', [$lowerBoundName, SteemHelper::filterInt($limit)]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -80,8 +92,12 @@ class SteemWitness
 	 */
 	public function getWitnessSchedule()
 	{
-		$this->api = $this->getApi('database_api');
-		return $this->client->call($this->api, 'get_witness_schedule', []);
+		try {
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'get_witness_schedule', []);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -91,9 +107,13 @@ class SteemWitness
 	 */
 	public function getWitnesses($accounts = [])
 	{
-		$accounts = !is_array($accounts) ? [$accounts] : $accounts;
-		$this->api = $this->getApi('database_api');
-		return $this->client->call($this->api, 'get_witnesses', [$accounts]);
+		try {
+			$accounts = !is_array($accounts) ? [$accounts] : $accounts;
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'get_witnesses', [$accounts]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -103,8 +123,12 @@ class SteemWitness
 	 */
 	public function getWitnessByAccount($account)
 	{
-		$this->api = $this->getApi('database_api');
-		return $this->client->call($this->api, 'get_witness_by_account', [$account]);
+		try {
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'get_witness_by_account', [$account]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -115,8 +139,12 @@ class SteemWitness
 	 */
 	public function getWitnessesByVote($account, $limit = 100)
 	{
-		$this->api = $this->getApi('database_api');
-		return $this->client->call($this->api, 'get_witnesses_by_vote', [$account, SteemHelper::filterInt($limit)]);
+		try {
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'get_witnesses_by_vote', [$account, SteemHelper::filterInt($limit)]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -125,8 +153,12 @@ class SteemWitness
 	 */
 	public function getActiveWitnesses()
 	{
-		$this->api = $this->getApi('database_api');
-		return $this->client->call($this->api, 'get_active_witnesses', []);
+		try {
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'get_active_witnesses', []);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -135,8 +167,12 @@ class SteemWitness
 	 */
 	public function getMinerQueue()
 	{
-		$this->api = $this->getApi('database_api');
-		return $this->client->call($this->api, 'get_miner_queue', []);
+		try {
+			$this->api = $this->getApi('database_api');
+			return $this->client->call($this->api, 'get_miner_queue', []);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 }

@@ -49,7 +49,11 @@ class SteemConnection
 	 */
 	public function getApi($name)
 	{
-		return $this->client->call(1, 'get_api_by_name', [$name]);
+		try {
+			return $this->client->call(1, 'get_api_by_name', [$name]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -58,9 +62,13 @@ class SteemConnection
 	 */
 	public function getProps()
 	{
-		$return = $this->client->call(0, 'get_dynamic_global_properties', []);
-		$return['steem_per_mvests'] = floor(SteemHelper::toInt($return['total_vesting_fund_steem']) / SteemHelper::toInt($return['total_vesting_shares']) * 1000000 * 1000) / 1000;
-		return $return;
+		try {
+			$return = $this->client->call(0, 'get_dynamic_global_properties', []);
+			$return['steem_per_mvests'] = floor(SteemHelper::toInt($return['total_vesting_fund_steem']) / SteemHelper::toInt($return['total_vesting_shares']) * 1000000 * 1000) / 1000;
+			return $return;
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -79,7 +87,11 @@ class SteemConnection
 	 */
 	public function getAccountHistory($username, $limit = 100, $skip = -1)
 	{
-		return $this->client->call(0, 'get_account_history', [$username, SteemHelper::filterInt($skip), SteemHelper::filterInt($limit)]);
+		try {
+			return $this->client->call(0, 'get_account_history', [$username, SteemHelper::filterInt($skip), SteemHelper::filterInt($limit)]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -89,11 +101,15 @@ class SteemConnection
 	 */
 	public function getAccount($account)
 	{
-		$this->return = $this->client->call(0, 'get_accounts', [[$account]]);
-		foreach($this->return as $this->index => $this->username) {
-			$this->return[$this->index]['profile'] = json_decode($this->username['json_metadata'], true)['profile'];
+		try {
+			$this->return = $this->client->call(0, 'get_accounts', [[$account]]);
+			foreach($this->return as $this->index => $this->username) {
+				$this->return[$this->index]['profile'] = json_decode($this->username['json_metadata'], true)['profile'];
+			}
+			return $this->return;
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
 		}
-		return $this->return;
 	}
 
 	/**
@@ -103,8 +119,12 @@ class SteemConnection
 	 */
 	public function getReputation($account)
 	{
-		$this->accountDetails = $this->getAccount($account);
-		return SteemHelper::reputation($this->accountDetails[0]['reputation']);
+		try {
+			$this->accountDetails = $this->getAccount($account);
+			return SteemHelper::reputation($this->accountDetails[0]['reputation']);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -115,9 +135,13 @@ class SteemConnection
 	 */
 	public function getAccountReputations($account, $limit = 100)
 	{
-		$this->api = $this->getApi('follow_api');
-		$this->return = $this->client->call($this->api, 'get_account_reputations', [$account, SteemHelper::filterInt($limit)]);
-		return $this->return;
+		try {
+			$this->api = $this->getApi('follow_api');
+			$this->return = $this->client->call($this->api, 'get_account_reputations', [$account, SteemHelper::filterInt($limit)]);
+			return $this->return;
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -127,9 +151,13 @@ class SteemConnection
 	 */
 	public function vestToSteemByAccount($account)
 	{
-		$this->accountDetails = $this->getAccount($account);
-		$this->Props = $this->getProps();
-		return SteemHelper::vestToSteem($this->accountDetails[0]['vesting_shares'], $this->Props['total_vesting_shares'], $this->Props['total_vesting_fund_steem']);
+		try {
+			$this->accountDetails = $this->getAccount($account);
+			$this->Props = $this->getProps();
+			return SteemHelper::vestToSteem($this->accountDetails[0]['vesting_shares'], $this->Props['total_vesting_shares'], $this->Props['total_vesting_fund_steem']);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -141,8 +169,12 @@ class SteemConnection
 	 */
 	public function getFollowing($account, $limit = 100, $skip = -1)
 	{
-		$this->api = $this->getApi('follow_api');
-		return $this->client->call($this->api, 'get_following', [$account, SteemHelper::filterInt($skip), 'blog', SteemHelper::filterInt($limit)]);
+		try {
+			$this->api = $this->getApi('follow_api');
+			return $this->client->call($this->api, 'get_following', [$account, SteemHelper::filterInt($skip), 'blog', SteemHelper::filterInt($limit)]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -154,8 +186,12 @@ class SteemConnection
 	 */
 	public function getFollowers($account, $limit = 100, $skip = -1)
 	{
-		$this->api = $this->getApi('follow_api');
-		return $this->client->call($this->api, 'get_followers', [$account, SteemHelper::filterInt($skip), 'blog', SteemHelper::filterInt($limit)]);
+		try {
+			$this->api = $this->getApi('follow_api');
+			return $this->client->call($this->api, 'get_followers', [$account, SteemHelper::filterInt($skip), 'blog', SteemHelper::filterInt($limit)]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 	/**
@@ -165,8 +201,12 @@ class SteemConnection
 	 */
 	public function countFollows($account)
 	{
-		$this->api = $this->getApi('follow_api');
-		return $this->client->call($this->api, 'get_follow_count', [$account]);
+		try {
+			$this->api = $this->getApi('follow_api');
+			return $this->client->call($this->api, 'get_follow_count', [$account]);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
 	}
 
 }
