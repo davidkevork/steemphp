@@ -24,7 +24,7 @@ class SteemHelperTest extends PHPUnit_Framework_TestCase
 
 	public function testFilterDate()
 	{
-		$this->assertEquals('2017-06-30T00-00-00', SteemHelper::filterDate('2017-06-30'));
+		$this->assertEquals('2017-06-29T22-00-00', SteemHelper::filterDate('2017-06-30'));
 	}
 
 	public function testVestToSteem()
