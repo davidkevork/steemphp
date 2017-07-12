@@ -195,8 +195,37 @@ trait SteemHelper
 		return $string{$pos};
 	}
 
-}
+	/**
+	 * Handle exceptions thrown while running the script
+	 * @param Exception $e 
+	 * @return array
+	 */
+	public static function handleError($e)
+	{
+		if (!is_object($e)) {
+			return [];
+		} else {
+			$instance = 'Exception';
+			if ($e instanceof \JsonRPC\Exception\ResponseException) {
+				$instance = 'JsonRPC\Exception\ResponseException';
+			} else if ($e instanceof \JsonRPC\Exception\ConnectionFailureException) {
+				$instance = 'JsonRPC\Exception\ConnectionFailureException';
+			} else if ($e instanceof \JsonRPC\Exception\InvalidJsonFormatException) {
+				$instance = 'JsonRPC\Exception\InvalidJsonFormatException';
+			} else if ($e instanceof \JsonRPC\Exception\ServerErrorException) {
+				$instance = 'JsonRPC\Exception\ServerErrorException';
+			} else if ($e instanceof \JsonRPC\Exception\ResponseEncodingFailureException) {
+				$instance = 'JsonRPC\Exception\ResponseEncodingFailureException';
+			}
+			return ['instance' => $instance,
+					'message' => $e->getMessage(),
+					'file' => $e->getFile(),
+					'line' => $e->getLine(),
+					'trace' => $e->getTrace()];
+		}
+	}
 
+}
 
 
 ?>
