@@ -32,7 +32,7 @@ class SteemWitness
 	 * Initialize the connection to the host
 	 * @param String $host
 	 * 
-	 * $host = ['https://node.steem.ws', 'https://steemd.steemit.com']
+	 * $host = ['https://steemd.steemitdev.com', 'https://steemd.steemit.com']
 	 */
 	public function __construct($host = 'https://steemd.steemit.com')
 	{

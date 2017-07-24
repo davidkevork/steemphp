@@ -209,6 +209,29 @@ class SteemConnection
 		}
 	}
 
+	/**
+	 * get the estimated account value of $account
+	 * 
+	 * $state = $SteemArticle->getState('/@'.$account.'/transfers')
+	 * $market = $SteemMaket->getOpenOrders($account);
+	 * 
+	 * NOTE: This function only gets the estimated amount of money inside the $accounts wallet
+	 * 
+	 * @param array $state 
+	 * @param array $openOrders 
+	 * @param String $account 
+	 * @return int on success
+	 * @return array on failure
+	 */
+	public function estimateAccountValue($state, $openOrders, $account)
+	{
+		try {
+			return SteemHelper::estimateAccountValue($state, $openOrders, $account);
+		} catch (\Exception $e) {
+			return SteemHelper::handleError($e);
+		}
+	}
+
 }
 
 ?>
