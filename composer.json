@@ -10,11 +10,10 @@
         }
     ],
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=5.6",
         "fguillot/json-rpc": "^1.2",
         "michelf/php-markdown": "~1.6.0",
         "ezyang/htmlpurifier": "~4.8.0",
-        "stephenhill/base58": "~1.0",
         "mdanter/ecc": "^0.4.0",
         "bitwasp/bitcoin": "0.0.31.x-dev"
     },
