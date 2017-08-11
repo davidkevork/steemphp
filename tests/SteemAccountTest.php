@@ -2,7 +2,7 @@
 
 include (__DIR__).'/../vendor/autoload.php';
 
-class SteemConnectionTest extends PHPUnit_Framework_TestCase
+class SteemAccountTest extends PHPUnit_Framework_TestCase
 {
 	protected function setUp()
 	{
