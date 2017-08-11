@@ -6,57 +6,57 @@ class SteemAccountTest extends PHPUnit_Framework_TestCase
 {
 	protected function setUp()
 	{
-		$this->SteemConnection = new \SteemPHP\SteemConnection('https://steemd.steemit.com');
+		$this->SteemAccount = new \SteemPHP\SteemAccount('https://steemd.steemit.com');
 	}
 
 	public function testGetApi()
 	{
-		$this->assertInternalType('int', $this->SteemConnection->getApi('login_api'));
+		$this->assertInternalType('int', $this->SteemAccount->getApi('login_api'));
 	}
 
 	public function testGetProps()
 	{
-		$this->assertArrayHasKey('head_block_number', $this->SteemConnection->getProps());
+		$this->assertArrayHasKey('head_block_number', $this->SteemAccount->getProps());
 	}
 
 	public function testGetAccountHistory()
 	{
-		$this->assertArrayHasKey('trx_id', $this->SteemConnection->getAccountHistory('davidk', 2)[0][1]);
+		$this->assertArrayHasKey('trx_id', $this->SteemAccount->getAccountHistory('davidk', 2)[0][1]);
 	}
 
 	public function testGetAccount()
 	{
-		$this->assertArrayHasKey('name', $this->SteemConnection->getAccount('davidk')[0]);
+		$this->assertArrayHasKey('name', $this->SteemAccount->getAccount('davidk')[0]);
 	}
 
 	public function testGetReputation()
 	{
-		$this->assertInternalType('int', $this->SteemConnection->getReputation('davidk'));
+		$this->assertInternalType('int', $this->SteemAccount->getReputation('davidk'));
 	}
 
 	public function testVestToSteemByAccount()
 	{
-		$this->assertInternalType('float', $this->SteemConnection->vestToSteemByAccount('davidk'));
+		$this->assertInternalType('float', $this->SteemAccount->vestToSteemByAccount('davidk'));
 	}
 
 	public function testGetFollowing()
 	{
-		$this->assertArrayHasKey('follower', $this->SteemConnection->getFollowing('davidk')[0]);
+		$this->assertArrayHasKey('follower', $this->SteemAccount->getFollowing('davidk')[0]);
 	}
 
 	public function testGetFollowers()
 	{
-		$this->assertArrayHasKey('follower', $this->SteemConnection->getFollowers('davidk')[0]);
+		$this->assertArrayHasKey('follower', $this->SteemAccount->getFollowers('davidk')[0]);
 	}
 
 	public function testCountFollows()
 	{
-		$this->assertArrayHasKey('account', $this->SteemConnection->countFollows('davidk'));
+		$this->assertArrayHasKey('account', $this->SteemAccount->countFollows('davidk'));
 	}
 
 	public function testGetAccountReputations()
 	{
-		$this->assertArrayHasKey('account', $this->SteemConnection->getAccountReputations('davidk', 2)[0]);
+		$this->assertArrayHasKey('account', $this->SteemAccount->getAccountReputations('davidk', 2)[0]);
 	}
 
 }
