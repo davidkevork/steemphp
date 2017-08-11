@@ -17,55 +17,30 @@ class SteemAuth
 {
 
 	/**
-	 * @var $host
+	 * @var $prefix
 	 * 
-	 * $host will be where our script will connect to fetch the data
+	 * $prefix is the address prefix for public keys
 	 */
-	protected $host;
+	public $prefix = "STM";
 
 	/**
-	 * @var $client
-	 * 
-	 * $client is part of JsonRPC which will be used to connect to the server
+	 * Sets the address prefix.
+	 *
+	 * @param      string  $prefix  The prefix
 	 */
-	protected $client;
-
-	/**
-	 * Initialize the connection to the host
-	 * @param String $host
-	 * 
-	 * $host = ['https://steemd.steemitdev.com', 'https://steemd.steemit.com']
-	 */
-	public function __construct($host = 'https://steemd.steemit.com')
+	public function setPrefix($prefix)
 	{
-		$this->host = trim($host);
-		$this->httpClient = new HttpClient($this->host);
-		$this->httpClient->withoutSslVerification();
-		$this->client = new Client($this->host, false, $this->httpClient);
-	}
-
-	/**
-	 * Get Api number
-	 * @param String $name 
-	 * @return int
-	 */
-	public function getApi($name)
-	{
-		try{
-			return $this->client->call(1, 'get_api_by_name', [$name]);
-		} catch (\Exception $e) {
-			return SteemHelper::handleError($e);
-		}
+		$this->prefix = trim($prefix);
 	}
 
 	/**
 	 * password to private WIF
 	 *
-	 * @param      <string>  $name      The username
-	 * @param      <string>  $password  The password
-	 * @param      <string>  $role      The role
+	 * @param      string  $name      The username
+	 * @param      string  $password  The password
+	 * @param      string  $role      The role
 	 *
-	 * @return     <string>  ( private wif )
+	 * @return     string  private wif
 	 */
 	public function toWif($name, $password, $role)
 	{
@@ -75,6 +50,23 @@ class SteemAuth
 		$privKey = PrivateKeyFactory::fromHex($hashSha256);
 		$privWif = $privKey->toWif();
 		return $privWif;
+	}
+
+	/**
+	 * Check if the given string is wif
+	 *
+	 * @param      string   $wif    The wif
+	 *
+	 * @return     boolean  True if wif, False otherwise.
+	 */
+	public function isWif($wif)
+	{
+		try {
+			PrivateKeyFactory::fromWif($wif);
+			return true;
+		} catch(\Exception $e) {
+			return false;
+		}
 	}
 
 }
