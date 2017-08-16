@@ -30,9 +30,12 @@ class SteemArticle
 
 	/**
 	 * Initialize the connection to the host
-	 * @param String $host
 	 * 
-	 * $host = ['https://steemd.steemitdev.com', 'https://steemd.steemit.com', 'https://steemd-int.steemit.com']
+	 * @param      string  $host   The node you want to connect
+	 * 
+	 * $host = ['https://steemd.steemitdev.com',
+	 * 			'https://steemd.steemit.com',
+	 *    		'https://steemd-int.steemit.com/'];
 	 */
 	public function __construct($host = 'https://steemd.steemit.com')
 	{
@@ -43,9 +46,11 @@ class SteemArticle
 	}
 
 	/**
-	 * Get Api number
-	 * @param String $name 
-	 * @return int
+	 * Gets the api number by api $name
+	 *
+	 * @param      sting  $name   The name of the api
+	 *
+	 * @return     integer        The api number
 	 */
 	public function getApi($name)
 	{
@@ -57,10 +62,12 @@ class SteemArticle
 	}
 
 	/**
-	 * Get the list of trending tags after $afteTag
-	 * @param String $afterTag 
-	 * @param int $limit 
-	 * @return array
+	 * Gets the list of trending tags after $afterTag.
+	 *
+	 * @param      string   $afterTag  The after tag
+	 * @param      integer  $limit     The limit
+	 *
+	 * @return     array    The trending tags.
 	 */
 	public function getTrendingTags($afterTag, $limit = 100)
 	{
@@ -73,10 +80,12 @@ class SteemArticle
 	}
 
 	/**
-	 * Get Content of an article
-	 * @param String $author 
-	 * @param String $permlink 
-	 * @return array
+	 * Gets the content of an article.
+	 *
+	 * @param      string  $author    The author
+	 * @param      string  $permlink  The permlink
+	 *
+	 * @return     array   The content.
 	 */
 	public function getContent($author, $permlink)
 	{
@@ -89,10 +98,12 @@ class SteemArticle
 	}
 
 	/**
-	 * Get Replies on an article
-	 * @param String $author 
-	 * @param String $permlink 
-	 * @return array
+	 * Gets the content replies.
+	 *
+	 * @param      string  $author    The author
+	 * @param      string  $permlink  The permlink
+	 *
+	 * @return     array   The content replies.
 	 */
 	public function getContentReplies($author, $permlink)
 	{
@@ -105,13 +116,15 @@ class SteemArticle
 	}
 
 	/**
-	 * Get list of articles (content/votes/comments) using the tag $tag
-	 * $startAuthor and $startPermlink are null by default and the data can be used for pagination
-	 * @param String $tag
-	 * @param int $limit
-	 * @param String $startAuthor
-	 * @param String $startPermlink
-	 * @return array
+	 * Gets the list of trending articles (content/votes/replies) posted under the $tag.
+	 * Start author and start permlink are for pagination.
+	 *
+	 * @param      string   $tag            The tag
+	 * @param      integer  $limit          The limit
+	 * @param      string   $startAuthor    The start author
+	 * @param      string   $startPermlink  The start permlink
+	 *
+	 * @return     array    The list of trending articles.
 	 */
 	public function getDiscussionsByTrending($tag, $limit = 100, $startAuthor = null, $startPermlink = null)
 	{
@@ -125,13 +138,15 @@ class SteemArticle
 	}
 
 	/**
-	 * Get list of new articles created using the tag $tag
-	 * $startAuthor and $startPermlink are null by default and the data can be used for pagination
-	 * @param String $tag
-	 * @param int $limit
-	 * @param String $startAuthor
-	 * @param String $startPermlink
-	 * @return array
+	 * Gets the list of articles created under the $tag
+	 * Start author and start permlink are for pagination.
+	 * 
+	 * @param      string   $tag            The tag
+	 * @param      integer  $limit          The limit
+	 * @param      string   $startAuthor    The start author
+	 * @param      string   $startPermlink  The start permlink
+	 *
+	 * @return     array    The list of articles.
 	 */
 	public function getDiscussionsByCreated($tag, $limit = 100, $startAuthor = null, $startPermlink = null)
 	{
@@ -144,16 +159,17 @@ class SteemArticle
 		}
 	}
 
-
 	/**
-	 * Get list of active article for the tag $tag
+	 * Gets the list of active articles under the $tag
 	 * active article: an article that has just recieved an upvote/comment/reblog
-	 * $startAuthor and $startPermlink are null by default and the data can be used for pagination
-	 * @param Strign $tag
-	 * @param int $limit
-	 * @param String $startAuthor
-	 * @param String $startPermlink
-	 * @return array
+	 * Start author and start permlink are for pagination
+	 *
+	 * @param      string   $tag            The tag
+	 * @param      integer  $limit          The limit
+	 * @param      string   $startAuthor    The start author
+	 * @param      string   $startPermlink  The start permlink
+	 *
+	 * @return     array    The list of active articles.
 	 */
 	public function getDiscussionsByActive($tag, $limit = 100, $startAuthor = null, $startPermlink = null)
 	{
@@ -167,13 +183,15 @@ class SteemArticle
 	}
 
 	/**
-	 * Get list of articles which are promoted and use the tag $tag
-	 * $startAuthor and $startPermlink are null by default and the data can be used for pagination
-	 * @param String $tag
-	 * @param int $limit
-	 * @param String $startAuthor
-	 * @param String $startPermlink
-	 * @return array
+	 * Gets the list of articles which are promoted under the tag $tag
+	 * Start author and start permlink are for pagination
+	 * 
+	 * @param      string   $tag            The tag
+	 * @param      integer  $limit          The limit
+	 * @param      string   $startAuthor    The start author
+	 * @param      string   $startPermlink  The start permlink
+	 *
+	 * @return     array    The list of promoted articles
 	 */
 	public function getDiscussionsByPromoted($tag, $limit = 100, $startAuthor = null, $startPermlink = null)
 	{
@@ -187,13 +205,15 @@ class SteemArticle
 	}
 
 	/**
-	 * Get list of articles were the rewards will be payed in less than 12 hour
-	 * $startAuthor and $startPermlink are null by default and the data can be used for pagination
-	 * @param String $tag
-	 * @param int $limit
-	 * @param String $startAuthor
-	 * @param String $startPermlink
-	 * @return array
+	 * Gets the list of articles where the rewards will be payed in less than 12 hour.
+	 * Start author and start permlink are for pagination.
+	 *
+	 * @param      string   $tag            The tag
+	 * @param      integer  $limit          The limit
+	 * @param      string   $startAuthor    The start author
+	 * @param      string   $startPermlink  The start permlink
+	 *
+	 * @return     array    The list of articles by cashout.
 	 */
 	public function getDiscussionsByCashout($tag, $limit = 100, $startAuthor = null, $startPermlink = null)
 	{
@@ -207,13 +227,15 @@ class SteemArticle
 	}
 
 	/**
-	 * Get list of articles with the highest payout using the tag $tag
-	 * $startAuthor and $startPermlink are null by default and the data can be used for pagination
-	 * @param String $tag
-	 * @param int $limit
-	 * @param String $startAuthor
-	 * @param String $startPermlink
-	 * @return array
+	 * Gets the list of articles which have the highest payout under the $tag.
+	 * Start author and start permlink are for pagination.
+	 *
+	 * @param      string   $tag            The tag
+	 * @param      integer  $limit          The limit
+	 * @param      string   $startAuthor    The start author
+	 * @param      string   $startPermlink  The start permlink
+	 *
+	 * @return     array    The list of articles by payout.
 	 */
 	public function getDiscussionsByPayout($tag, $limit = 100, $startAuthor = null, $startPermlink = null)
 	{
@@ -228,12 +250,14 @@ class SteemArticle
 
 	/**
 	 * Get list of articles that has recieved the highest upvotes using the tag $tag
-	 * $startAuthor and $startPermlink are null by default and the data can be used for pagination
-	 * @param String $tag
-	 * @param int $limit
-	 * @param String $startAuthor
-	 * @param String $startPermlink
-	 * @return array
+	 * Start author and start permlink are for pagination
+	 *
+	 * @param      string   $tag            The tag
+	 * @param      integer  $limit          The limit
+	 * @param      string   $startAuthor    The start author
+	 * @param      string   $startPermlink  The start permlink
+	 *
+	 * @return     array    The discussions by votes.
 	 */
 	public function getDiscussionsByVotes($tag, $limit = 100, $startAuthor = null, $startPermlink = null)
 	{
@@ -248,12 +272,14 @@ class SteemArticle
 
 	/**
 	 * Get articles by childer
-	 * $startAuthor and $startPermlink are null by default and the data can be used for pagination
-	 * @param String $tag
-	 * @param int $limit
-	 * @param String $startAuthor
-	 * @param String $startPermlink
-	 * @return array
+	 * Start author and start permlink are for pagination
+	 *
+	 * @param      string   $tag            The tag
+	 * @param      integer  $limit          The limit
+	 * @param      string   $startAuthor    The start author
+	 * @param      string   $startPermlink  The start permlink
+	 *
+	 * @return     array    The discussions by children.
 	 */
 	public function getDiscussionsByChildren($tag, $limit = 100, $startAuthor = null, $startPermlink = null)
 	{
@@ -268,12 +294,14 @@ class SteemArticle
 
 	/**
 	 * Get list of articles which are hot and using tha tag $tag
-	 * $startAuthor and $startPermlink are null by default and the data can be used for pagination
-	 * @param String $tag
-	 * @param int $limit
-	 * @param String $startAuthor
-	 * @param String $startPermlink
-	 * @return array
+	 * Start author and start permlink are for pagination
+	 *
+	 * @param      string   $tag            The tag
+	 * @param      integer  $limit          The limit
+	 * @param      string   $startAuthor    The start author
+	 * @param      string   $startPermlink  The start permlink
+	 *
+	 * @return     array    The discussions by hot.
 	 */
 	public function getDiscussionsByHot($tag, $limit = 100, $startAuthor = null, $startPermlink = null)
 	{
@@ -288,12 +316,14 @@ class SteemArticle
 
 	/**
 	 * Get list of articles in the feed section for the author $author
-	 * $startAuthor and $startPermlink are null by default and the data can be used for pagination
-	 * @param String $author
-	 * @param int $limit
-	 * @param String $startAuthor
-	 * @param String $startPermlink
-	 * @return array
+	 * Start author and start permlink are for pagination
+	 *
+	 * @param      string   $author         The author
+	 * @param      integer  $limit          The limit
+	 * @param      string   $startAuthor    The start author
+	 * @param      string   $startPermlink  The start permlink
+	 *
+	 * @return     array    The discussions by feed.
 	 */
 	public function getDiscussionsByFeed($author, $limit = 100, $startAuthor = null, $startPermlink = null)
 	{
@@ -309,9 +339,12 @@ class SteemArticle
 	/**
 	 * Get list of articles written/reblogged by the author $author
 	 * $startPermlink are null by default and the data can be used for pagination
-	 * @param String $author 
-	 * @param int $limit 
-	 * @return array
+	 * 
+	 * @param      string   $author         The author
+	 * @param      integer  $limit          The limit
+	 * @param      string   $startPermlink  The start permlink
+	 *
+	 * @return     array    The discussions by blog.
 	 */
 	public function getDiscussionsByBlog($author, $limit = 100, $startPermlink = null)
 	{
@@ -326,10 +359,13 @@ class SteemArticle
 	}
 
 	/**
-	 * Get list of articles the author #author has commented on
-	 * @param String $author 
-	 * @param int $limit 
-	 * @return type
+	 * Get list of articles the $author has commented on
+	 *
+	 * @param      string   $author    The author
+	 * @param      string   $permlink  The permlink
+	 * @param      integer  $limit     The limit
+	 *
+	 * @return     array    The discussions by comments.
 	 */
 	public function getDiscussionsByComments($author, $permlink, $limit = 100)
 	{
@@ -343,12 +379,14 @@ class SteemArticle
 	}
 
 	/**
-	 * Get the list of articles written by the author $author before the date $beforeDate
-	 * @param String $author 
-	 * @param String $startPermlink 
-	 * @param datetime and timestamp $beforeDate 
-	 * @param int $limit 
-	 * @return array
+	 * Get the list of articles written by the $author before the date $beforeDate
+	 * 
+	 * @param      string   $author         The author
+	 * @param      string   $startPermlink  The start permlink
+	 * @param      date     $beforeDate     The before date
+	 * @param      integer  $limit          The limit
+	 *
+	 * @return     array    The discussions by author before date.
 	 */
 	public function getDiscussionsByAuthorBeforeDate($author, $startPermlink, $beforeDate, $limit = 100)
 	{
@@ -363,10 +401,12 @@ class SteemArticle
 	/**
 	 * Get list of replies for where the article has recieved the most upvotes for the author $author
 	 * where the article has been posted less than a week ago 
-	 * @param String $startAuthor 
-	 * @param String $startPermlink 
-	 * @param int $limit 
-	 * @return array
+	 * 
+	 * @param      string   $startAuthor    The start author
+	 * @param      string   $startPermlink  The start permlink
+	 * @param      integer  $limit          The limit
+	 *
+	 * @return     array    The replies by last upvote.
 	 */
 	public function getRepliesByLastUpvote($startAuthor, $startPermlink, $limit = 100)
 	{
@@ -380,10 +420,11 @@ class SteemArticle
 
 	/**
 	 * Get the list of upvotes the article $startPermlink has received
-	 * @param String $startAuthor 
-	 * @param String $startPermlink 
-	 * @param int $limit 
-	 * @return array
+	 *
+	 * @param      string  $startAuthor    The start author
+	 * @param      string  $startPermlink  The start permlink
+	 *
+	 * @return     array   The active votes.
 	 */
 	public function getActiveVotes($startAuthor, $startPermlink)
 	{
@@ -397,8 +438,10 @@ class SteemArticle
 
 	/**
 	 * Get state for $path eg: /@davidk
-	 * @param String $path 
-	 * @return array
+	 *
+	 * @param      string  $path   The path
+	 *
+	 * @return     array   The state.
 	 */
 	public function getState($path)
 	{

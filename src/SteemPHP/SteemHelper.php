@@ -9,19 +9,23 @@ trait SteemHelper
 {
 
 	/**
-	 * turns 1.90 STEEM to 1.90 by removing non-numeric characters
-	 * @param String $string 
-	 * @return int
-	 */	
+	 * removes non-numeric characters and returns just numbers
+	 *
+	 * @param      string   $string  The string
+	 *
+	 * @return     integer  the integer from the string
+	 */
 	public static function toInt($string)
 	{
 		return preg_replace('/[^0-9\.]/', '', $string);
 	}
 
 	/**
-	 * check if an input is int or no
-	 * @param int $int 
-	 * @return boolean
+	 * Checks if an input is integer or not
+	 *
+	 * @param      integer  $int    The int
+	 *
+	 * @return     boolean  true of int, false otherwise
 	 */
 	public static function filterInt($int)
 	{
@@ -29,9 +33,11 @@ trait SteemHelper
 	}
 
 	/**
-	 * transfers timestamp or normal date to the format('Y-m-d\TH-i-s')
-	 * @param date/timestamp $date 
-	 * @return date
+	 * Changes timestamp or date to format('Y-m-d\TH-i-s')
+	 *
+	 * @param      date/timestamp  $date   The date
+	 *
+	 * @return     date            The date in the format
 	 */
 	public static function filterDate($date)
 	{
@@ -42,9 +48,11 @@ trait SteemHelper
 	}
 
 	/**
-	 * returns the reputation from a set of number
-	 * @param int $rep 
-	 * @return int
+	 * calculated the reputation from the raw reputation
+	 *
+	 * @param      integer   $rep    The rar reputation
+	 *
+	 * @return     integer   The repution
 	 */
 	public static function reputation($rep)
 	{
@@ -65,18 +73,19 @@ trait SteemHelper
 	/**
 	 * get estimated account value
 	 * 
-	 * this code is broken and only calculated the amount of money the user currently has
+	 * NOTE: this code is broken and only calculated the amount of money the user currently has
 	 * do not use until we fix it
-	 * 
-	 * @param array $data 
-	 * @param array $market 
-	 * @param array $account 
-	 * @return int
+	 *
+	 * @param      array         $data     The data
+	 * @param      array         $market   The market
+	 * @param      array         $account  The account
+	 *
+	 * @return     array|null    If correct data is not supplied will return null
 	 */
 	public static function estimateAccountValue($data, $market, $account)
 	{
 		if (is_null($data) && !is_array($data)) {
-			return 0;
+			return null;
 		} else {
 			$props = $data['props'];
 			$feed_price = $data['feed_price'];
@@ -116,10 +125,12 @@ trait SteemHelper
 	}
 
 	/**
-	 * process the orders of the account and return the total SBD and STEEM orders
-	 * @param array $open_orders 
-	 * @param int $precision 
-	 * @return array
+	 * Process the orders of the accoutn and return the total SBD and STEEM orders
+	 *
+	 * @param      array    $open_orders  The open orders
+	 * @param      integer  $precision    The precision
+	 *
+	 * @return     array    sbdOrders and steemOrders
 	 */
 	public static function processOrders($open_orders, $precision)
 	{
@@ -142,6 +153,13 @@ trait SteemHelper
 	 * @param array $savings_withdraws 
 	 * @return array
 	 */
+	/**
+	 * Calculate the toal SBD and STEEM saving of the account
+	 *
+	 * @param      array  $savings_withdraws  The savings withdraws
+	 *
+	 * @return     array   The saving.
+	 */
 	public static function calculateSaving($savings_withdraws)
 	{
 		$savings_pending = 0;
@@ -162,11 +180,13 @@ trait SteemHelper
 	}
 
 	/**
-	 * find the amount of steem the vests are worth
-	 * @param int $vestingShares
-	 * @param int $totalVestingFundSteem
-	 * @param int $totalVestingShares
-	 * @return int
+	 * Find the amount of steem the vests are worth
+	 *
+	 * @param      integer  $vestingShares          The vesting shares
+	 * @param      integer  $totalVestingFundSteem  The total vesting fund steem
+	 * @param      integer  $totalVestingShares     The total vesting shares
+	 *
+	 * @return     integer  The amount of steem worth
 	 */
 	public static function vestToSteem($vestingShares, $totalVestingFundSteem, $totalVestingShares)
 	{
@@ -174,10 +194,12 @@ trait SteemHelper
 	}
 
 	/**
-	 * check if a string contains the $data in it
-	 * @param String $data 
-	 * @param String $contains 
-	 * @return int
+	 * Checks if the $contains is found in the $data
+	 *
+	 * @param      string   $data      The data
+	 * @param      string   $contains  The char that it contains
+	 *
+	 * @return     integer  1 if contains, 0 otherwise
 	 */
 	public static function contains($data, $contains)
 	{
@@ -185,10 +207,12 @@ trait SteemHelper
 	}
 
 	/**
-	 * get the character at $pos
-	 * @param String $string 
-	 * @param int $pos 
-	 * @return String
+	 * Get the character at the position $pos
+	 *
+	 * @param      string   $string  The string
+	 * @param      integer  $pos     The position
+	 *
+	 * @return     string   The character at that position
 	 */
 	public static function charAt($string, $pos)
 	{
@@ -197,8 +221,10 @@ trait SteemHelper
 
 	/**
 	 * Handle exceptions thrown while running the script
-	 * @param Exception $e 
-	 * @return array
+	 *
+	 * @param      Exception  $e      The exception that is catched
+	 *
+	 * @return     array  	  details of the exception
 	 */
 	public static function handleError($e)
 	{
