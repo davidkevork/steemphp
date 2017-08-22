@@ -11,7 +11,7 @@ class SteemMarketTest extends PHPUnit_Framework_TestCase
 
 	public function testGetApi()
 	{
-		$this->assertInternalType('int', $this->SteemChain->getApi('login_api'));
+		$this->assertInternalType('int', $this->SteemMarket->getApi('login_api'));
 	}
 
 	public function testGetOrderBook()
