@@ -9,6 +9,20 @@ trait SteemHelper
 {
 
 	/**
+	 * Returns a list of Steem RPC nodes
+	 *
+	 * @return     array  RPC nodes
+	 */
+	public static function nodes()
+	{
+		return ['https://steemd.steemitdev.com',
+				'https://steemd.steemit.com',
+				'https://steemd-int.steemit.com/',
+				'https://steemd.privex.io/',
+				'https://rpc.steemliberator.com/'];
+	}
+
+	/**
 	 * removes non-numeric characters and returns just numbers
 	 *
 	 * @param      string   $string  The string
@@ -149,11 +163,6 @@ trait SteemHelper
 	}
 
 	/**
-	 * calculate the total SBD and STEEM saving of the account
-	 * @param array $savings_withdraws 
-	 * @return array
-	 */
-	/**
 	 * Calculate the toal SBD and STEEM saving of the account
 	 *
 	 * @param      array  $savings_withdraws  The savings withdraws
@@ -248,6 +257,44 @@ trait SteemHelper
 					'file' => $e->getFile(),
 					'line' => $e->getLine(),
 					'trace' => $e->getTrace()];
+		}
+	}
+
+	/**
+	 * PHP port of JavaScript String slice() method
+	 * from https://gist.github.com/janogarcia/743209
+	 *
+	 * @param      string   $str    The string
+	 * @param      integer  $start  The start
+	 * @param      integer  $end    The end (optional)
+	 *
+	 * @return     string   The sliced data
+	 */
+	public static function str_slice($str, $start, $end = FALSE)
+	{
+		$max = strlen($str);
+		$start = ($start < 0) ? $max + $start : $start;
+		$end = ($end < 0) ? $max + $end : (($end === FALSE) ? $max : $end);
+		$slice = substr($str, $start, ($end > $start) ? $end - $start : 0);
+		return ($slice === FALSE) ? '' : $slice;
+	}
+
+    /**
+     * PHP port of JavaScript String slice() method taken from BitWasp\Bitcoin
+     *
+     * @param      array    $array   The array
+     * @param      integer  $start   The start
+     * @param      integer  $length  The length
+     *
+     * @return     array    error on failue, result on success
+     */
+    public static function slice($array, $start, $length)
+    {
+		$end = count($array);
+		if ($start > $end || $length > $end) {
+			return ['error' => 'Invalid start or length'];
+		} else {
+			['result' => $sliced = array_slice($this->set, $start, $length)];
 		}
 	}
 
