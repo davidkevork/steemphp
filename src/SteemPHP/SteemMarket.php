@@ -32,10 +32,6 @@ class SteemMarket
 	 * Initialize the connection to the host
 	 * 
 	 * @param      string  $host   The node you want to connect
-	 * 
-	 * $host = ['https://steemd.steemitdev.com',
-	 * 			'https://steemd.steemit.com',
-	 *    		'https://steemd-int.steemit.com/'];
 	 */
 	public function __construct($host = 'https://steemd.steemit.com')
 	{

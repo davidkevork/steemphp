@@ -32,9 +32,8 @@ class SteemBlock
 
 	/**
 	 * Initialize the connection to the host
-	 * @param String $host
 	 * 
-	 * $host = ['https://steemd.steemitdev.com', 'https://steemd.steemit.com']
+	 * @param      string  $host   The node you want to connect
 	 */
 	public function __construct($host = 'https://steemd.steemit.com')
 	{
@@ -45,9 +44,11 @@ class SteemBlock
 	}
 
 	/**
-	 * Get Api number
-	 * @param String $name 
-	 * @return int
+	 * Gets the api number by api $name
+	 *
+	 * @param      string  $name   The name of the api
+	 *
+	 * @return     integer         The api number
 	 */
 	public function getApi($name)
 	{

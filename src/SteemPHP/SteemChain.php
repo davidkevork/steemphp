@@ -29,9 +29,8 @@ class SteemChain
 
 	/**
 	 * Initialize the connection to the host
-	 * @param String $host
 	 * 
-	 * $host = ['https://steemd.steemitdev.com', 'https://steemd.steemit.com']
+	 * @param      string  $host   The node you want to connect
 	 */
 	public function __construct($host = 'https://node.steem.ws')
 	{
