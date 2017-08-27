@@ -15,11 +15,12 @@ trait SteemHelper
 	 */
 	public static function nodes()
 	{
-		return ['https://steemd.steemitdev.com',
+		return ['https://gtg.steem.house:8090',
+				'https://steemd.steemitdev.com',
 				'https://steemd.steemit.com',
-				'https://steemd-int.steemit.com/',
-				'https://steemd.privex.io/',
-				'https://rpc.steemliberator.com/'];
+				'https://steemd-int.steemit.com',
+				'https://seed.bitcoiner.me',
+				'https://steemd.privex.io',];
 	}
 
 	/**
