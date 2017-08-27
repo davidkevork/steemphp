@@ -12,6 +12,16 @@ class SteemHelperTest extends PHPUnit_Framework_TestCase
 		$this->assertInternalType('string', SteemHelper::toInt('500 STEEM'));
 	}
 
+	public function testNodes()
+	{
+		$this->assertEquals(['https://gtg.steem.house:8090',
+				'https://steemd.steemitdev.com',
+				'https://steemd.steemit.com',
+				'https://steemd-int.steemit.com',
+				'https://seed.bitcoiner.me',
+				'https://steemd.privex.io'], SteemHelper::nodes());
+	}
+
 	public function testFilterInt()
 	{
 		$this->assertInternalType('int', SteemHelper::filterInt(500));
@@ -40,6 +50,21 @@ class SteemHelperTest extends PHPUnit_Framework_TestCase
 	public function testCharAt()
 	{
 		$this->assertEquals('a', SteemHelper::charAt('abcd', 0));
+	}
+
+	public function testHandleError()
+	{
+		$this->assertEquals([], SteemHelper::handleError(''));
+	}
+
+	public function testStr_slice()
+	{
+		$this->assertEquals('abc', SteemHelper::str_slice('abcdefg', 0, 3));
+	}
+
+	public function testSlice()
+	{
+		$this->assertEquals(['result' => ['d','e','f','g']] ,SteemHelper::slice(['a','b','c','d','e','f','g'], -4, 7));
 	}
 
 }
