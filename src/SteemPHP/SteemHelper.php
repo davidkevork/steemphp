@@ -295,7 +295,7 @@ trait SteemHelper
 		if ($start > $end || $length > $end) {
 			return ['error' => 'Invalid start or length'];
 		} else {
-			['result' => $sliced = array_slice($this->set, $start, $length)];
+			return ['result' => array_slice($array, $start, $length)];
 		}
 	}
 
