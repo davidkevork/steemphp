@@ -32,47 +32,47 @@ class SteemArticleTest extends PHPUnit_Framework_TestCase
 
 	public function testGetDiscussionsByTrending()
 	{
-		$this->assertArrayHasKey('author', $this->SteemArticle->getDiscussionsByTrending('steemit', 2)[0]);
+		$this->assertArrayHasKey('author', $this->SteemArticle->getDiscussionsByTrending('life', 2)[0]);
 	}
 
 	public function testGetDiscussionsByCreated()
 	{
-		$this->assertArrayHasKey('author', $this->SteemArticle->getDiscussionsByCreated('steemit', 2)[0]);
+		$this->assertArrayHasKey('author', $this->SteemArticle->getDiscussionsByCreated('life', 2)[0]);
 	}
 
 	public function testGetDiscussionsByActive()
 	{
-		$this->assertArrayHasKey('author', $this->SteemArticle->getDiscussionsByActive('steemit', 2)[0]);
+		$this->assertArrayHasKey('author', $this->SteemArticle->getDiscussionsByActive('life', 2)[0]);
 	}
 
 	public function testGetDiscussionsByPromoted()
 	{
-		$this->assertArrayHasKey('author', $this->SteemArticle->getDiscussionsByPromoted('steemit', 2)[0]);
+		$this->assertArrayHasKey('author', $this->SteemArticle->getDiscussionsByPromoted('life', 2)[0]);
 	}
 
 	public function testGetDiscussionsByCashout()
 	{
-		$this->assertInternalType('array', $this->SteemArticle->getDiscussionsByCashout('steemit', 2));
+		$this->assertInternalType('array', $this->SteemArticle->getDiscussionsByCashout('life', 2));
 	}
 
 	public function testGetDiscussionsByPayout()
 	{
-		$this->assertArrayHasKey('author', $this->SteemArticle->getDiscussionsByPayout('steemit', 2)[0]);
+		$this->assertArrayHasKey('author', $this->SteemArticle->getDiscussionsByPayout('life', 2)[0]);
 	}
 
 	public function testGetDiscussionsByVotes()
 	{
-		$this->assertArrayHasKey('author', $this->SteemArticle->getDiscussionsByVotes('steemit', 2)[0]);
+		$this->assertArrayHasKey('author', $this->SteemArticle->getDiscussionsByVotes('life', 2)[0]);
 	}
 
 	public function testGetDiscussionsByChildren()
 	{
-		$this->assertArrayHasKey('author', $this->SteemArticle->getDiscussionsByChildren('steemit', 2)[0]);
+		$this->assertArrayHasKey('author', $this->SteemArticle->getDiscussionsByChildren('life', 2)[0]);
 	}
 
 	public function testGetDiscussionsByHot()
 	{
-		$this->assertArrayHasKey('author', $this->SteemArticle->getDiscussionsByHot('steemit', 2)[0]);
+		$this->assertArrayHasKey('author', $this->SteemArticle->getDiscussionsByHot('life', 2)[0]);
 	}
 
 	public function testGetDiscussionsByFeed()
