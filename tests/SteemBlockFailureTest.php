@@ -26,7 +26,7 @@ class SteemBlockFailureTest extends PHPUnit_Framework_TestCase
 
 	public function testGetOpsInBlock()
 	{
-		$this->assertArrayHasKey('instance', $this->SteemBlock->getOpsInBlock(15082480)[0]);
+		$this->assertArrayHasKey('instance', $this->SteemBlock->getOpsInBlock(15082480));
 	}
 
 	public function testGetTransactionHex()
