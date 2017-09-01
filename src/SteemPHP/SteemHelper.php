@@ -99,7 +99,7 @@ trait SteemHelper
 	 */
 	public static function estimateAccountValue($data, $market, $account)
 	{
-		if (is_null($data) && !is_array($data)) {
+		if (is_null($data) || !is_array($data)) {
 			return null;
 		} else {
 			$props = $data['props'];
