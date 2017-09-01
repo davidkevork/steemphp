@@ -2,11 +2,9 @@
 
 namespace SteemPHP;
 
-use JsonRPC\Client;
-use JsonRPC\HttpClient;
 use SteemPHP\SteemHelper;
-use BitWasp\Bitcoin\Bitcoin;
-use BitWasp\Bitcoin\Key\PrivateKeyFactory;
+use SteemPHP\SteemPrivate;
+use SteemPHP\SteemPublic;
 
 /**
 * SteemAuth
@@ -34,38 +32,39 @@ class SteemAuth
 	}
 
 	/**
-	 * password to private WIF
+	 * Gets the private keys.
 	 *
-	 * @param      string  $name      The username
+	 * @param      string  $name      The name
 	 * @param      string  $password  The password
-	 * @param      string  $role      The role
 	 *
-	 * @return     string  private wif
+	 * @return     arrray  The private keys.
 	 */
-	public function toWif($name, $password, $role)
+	public function getPrivateKeys($name, $password)
 	{
-		$seed = $name.$role.$password;
-		$brainKey = implode(" ", explode("/[\t\n\v\f\r ]+/", trim($seed)));
-		$hashSha256 = hash('sha256', $brainKey);
-		$privKey = PrivateKeyFactory::fromHex($hashSha256);
-		$privWif = $privKey->toWif();
-		return $privWif;
+		$this->role = ['owner', 'active', 'posting', 'memo'];
+		$this->key = [];
+		$SteemPrivate = new SteemPrivate;
+		$SteemPublic = new SteemPublic;
+		foreach ($this->role as $value) {
+			$this->key[$value] = $SteemPrivate->toWif($name, $password, $value);
+			$this->key[$value.'Pubkey'] = ($this->key[$value]);
+		}
+		return $this->key;
 	}
 
 	/**
-	 * Check if the given string is wif
+	 * Nomralize the brain key
 	 *
-	 * @param      string   $wif    The wif
+	 * @param      string 		 $brain_key  The brain key
 	 *
-	 * @return     boolean  True if wif, False otherwise.
+	 * @return     array|string  array on failure|string on success
 	 */
-	public function isWif($wif)
+	public function normalize($brain_key)
 	{
-		try {
-			PrivateKeyFactory::fromWif($wif);
-			return true;
-		} catch(\Exception $e) {
-			return false;
+		if (gettype($brain_key) != "string") {
+			return ['error' => 'string required for brain_key'];
+		} else {
+			return implode(" ", explode("/[\t\n\v\f\r ]+/", trim($brain_key)));
 		}
 	}
 
