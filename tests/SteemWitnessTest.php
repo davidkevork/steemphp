@@ -49,6 +49,11 @@ class SteemWitnessTest extends PHPUnit_Framework_TestCase
 		$this->assertArrayHasKey('0', $this->SteemWitness->getActiveWitnesses());
 	}
 
+	public function testGetMinerQueue()
+	{
+		$this->assertArrayHasKey('0', $this->SteemWitness->getMinerQueue());
+	}
+
 }
 
 ?>
