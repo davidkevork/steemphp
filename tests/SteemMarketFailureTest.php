@@ -47,7 +47,7 @@ class SteemMarketFailureTest extends PHPUnit_Framework_TestCase
 
 	public function testGetMarketHistoryBuckets()
 	{
-		$this->assertArrayHasKey('instance', $this->SteemMarket->getMarketHistoryBuckets()[0]);
+		$this->assertArrayHasKey('instance', $this->SteemMarket->getMarketHistoryBuckets());
 	}
 
 	public function testGetOrderBookFromMarket()
@@ -58,7 +58,7 @@ class SteemMarketFailureTest extends PHPUnit_Framework_TestCase
 
 	public function testGetRecentTrades()
 	{
-		$this->assertArrayHasKey('instance', $this->SteemMarket->getRecentTrades(5)[0]);
+		$this->assertArrayHasKey('instance', $this->SteemMarket->getRecentTrades(5));
 	}
 
 	public function testGetTradeHistory()
