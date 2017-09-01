@@ -115,7 +115,7 @@ class SteemBlock
 	{
 		try {
 			$this->api = $this->getApi('database_api');
-			return $this->client->call($this->api, 'get_transaction_hex', [$trx]);
+			return $this->client->call($this->api, 'get_transaction_hex', [['trx' => $trx]]);
 		} catch (\Exception $e) {
 			return SteemHelper::handleError($e);
 		}
@@ -192,7 +192,7 @@ class SteemBlock
 	public function verifyAccountAuthority($NameOrId, $singers)
 	{
 		try {
-			$this->api = $this->getApi('account_by_key_api');
+			$this->api = $this->getApi('get_key_references');
 			return $this->client->call($this->api, 'verify_account_authority', [$NameOrId, $singers]);
 		} catch (\Exception $e) {
 			return SteemHelper::handleError($e);
