@@ -3,6 +3,7 @@
 namespace SteemPHP;
 
 use SteemPHP\SteemHelper;
+use BitWasp\Buffertools\Buffer;
 use BitWasp\Bitcoin\Key\PrivateKeyFactory;
 
 /**
