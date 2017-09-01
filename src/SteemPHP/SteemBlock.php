@@ -293,11 +293,11 @@ class SteemBlock
 	}
 
 	// To be documented
-	public function setMaxBlockAge($maxBlcokAge)
+	public function setMaxBlockAge($maxBlockAge)
 	{
 		try {
 			$this->api = $this->getApi('network_broadcast_api');
-			return $this->client->call($this->api, 'set_max_block_age', [$maxBlcokAge]);
+			return $this->client->call($this->api, 'set_max_block_age', [$maxBlockAge]);
 		} catch (\Exception $e) {
 			return SteemHelper::handleError($e);
 		}
