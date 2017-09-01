@@ -30,9 +30,14 @@ class SteemPrivateTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals('5JN8BCwLUw3CddU9tGjyWX7ahV9iye1tfsDzn9Ab5tg6kzd1fZ8', $this->SteemPrivate->fromBuffer('484aaef3bc4f8983a6ae44526f39f949b7cdd731db7d6f87a93b1432b3dde468'));
 	}
 
-	public function testIsWif()
+	public function testIsWifT()
 	{
 		$this->assertTrue($this->SteemPrivate->isWif('5JRaypasxMx1L97ZUX7YuC5Psb5EAbF821kkAGtBj7xCJFQcbLg'));
+	}
+
+	public function testIsWifF()
+	{
+		$this->assertFalse($this->SteemPrivate->isWif('davidk'));
 	}
 
 	public function testFromWif()
