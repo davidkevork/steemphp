@@ -31,7 +31,7 @@ class SteemBlockTest extends PHPUnit_Framework_TestCase
 
 	public function testGetTransactionHex()
 	{
-		$this->assertArrayHasKey('00000000000000000000000000', $this->SteemBlock->getTransactionHex('22e7151e8dbf10c8342cf174db4d18788dbede28'));
+		$this->assertEquals('00000000000000000000000000', $this->SteemBlock->getTransactionHex('22e7151e8dbf10c8342cf174db4d18788dbede28'));
 	}
 
 	public function testGetTransaction()
