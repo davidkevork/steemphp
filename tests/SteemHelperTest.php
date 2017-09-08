@@ -39,12 +39,12 @@ class SteemHelperTest extends PHPUnit_Framework_TestCase
 
 	public function testNow()
 	{
-		$this->assertInternalType('date', SteemHelper::now());
+		$this->assertEquals(date('Y-m-d\TH:i:s'), SteemHelper::now());
 	}
 
 	public function testBlockTime()
 	{
-		$this->assertInternalType('date', SteemHelper::BlockTime(SteemHelper::now(), 'PT1M'));
+		$this->assertEquals(date('Y-m-d\TH:i:s', strtotime('+1 minute')), SteemHelper::BlockTime(SteemHelper::now(), 'PT1M'));
 	}
 
 	public function testVestToSteem()
