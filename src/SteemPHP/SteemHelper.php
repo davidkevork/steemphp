@@ -59,7 +59,39 @@ trait SteemHelper
 		$date = strtotime($date) ? $date : date('Y-m-d H:i:s', $date);
 		$dt = new \DateTime($date);
 		$dt->setTimeZone(new \DateTimeZone('UTC'));
-		return $dt->format('Y-m-d\TH-i-s');
+		return $dt->format('Y-m-d\TH:i:s');
+	}
+
+	/**
+	 * Get the current time informat('Y-m-d\TH:i:s')
+	 *
+	 * @return     date     the current time
+	 */
+	public static function now()
+	{
+		return (new \DateTime())->format('Y-m-d\TH:i:s');
+	}
+
+	/**
+	 * Steem Block expiration time should always be set 1 minute ahead of the current time
+	 *
+	 * @param      date    $now    The current time
+	 * @param      string  $add    The time to add
+	 *
+	 * @return     date    the current time
+	 * 
+	 * To add Years use 'P1Y'
+	 * To add Months use 'P1M'
+	 * To add days use 'P1D'
+	 * To add hours use 'PT1H'
+	 * To add minutes use 'PT1M'
+	 * To add seconds use 'PT1S'
+	 */
+	public static function BlockTime($now, $add)
+	{
+		$date = new \DateTime($now);
+		$date->add(new \DateInterval(strtoupper($add)));
+		return $date->format('Y-m-d\TH:i:s');
 	}
 
 	/**
